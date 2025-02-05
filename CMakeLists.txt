@@ -4,7 +4,7 @@ project(game)
 
 find_package(SDL2 REQUIRED)
 
-add_executable(game main.cpp)
+add_executable(game main.cpp "utils/Vec2.cpp")
 
 target_link_libraries(
 	game 
