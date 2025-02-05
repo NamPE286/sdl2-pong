@@ -14,7 +14,8 @@ class Counter {
 public:
 	int count = 0;
 
-	Counter(Vec2 _pos, SDL_Renderer* renderer, TTF_Font* font);
+	Counter(Vec2 pos, SDL_Renderer* _renderer, TTF_Font* _font);
+	~Counter();
 	void draw();
 	void operator++();
 	void operator--();

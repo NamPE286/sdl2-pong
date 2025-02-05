@@ -1,22 +1,22 @@
 #include "Ball.hpp"
 
 Ball::Ball(Vec2 _pos, const int _size) {
-	Ball::pos = _pos;
-	Ball::size = _size;
-	Ball::rect.x = static_cast<int>(_pos.x);
-	Ball::rect.y = static_cast<int>(_pos.y);
-	Ball::rect.w = Ball::rect.h = _size;
+	pos = _pos;
+	size = _size;
+	rect.x = static_cast<int>(_pos.x);
+	rect.y = static_cast<int>(_pos.y);
+	rect.w = rect.h = _size;
 }
 
-void Ball::draw(SDL_Renderer* renderer) {
-	Ball::rect.x = static_cast<int>(Ball::pos.x);
-	Ball::rect.y = static_cast<int>(Ball::pos.y);
+void Ball:: draw(SDL_Renderer* renderer) {
+	rect.x = static_cast<int>(pos.x);
+	rect.y = static_cast<int>(pos.y);
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderFillRect(renderer, &(Ball::rect));
+	SDL_RenderFillRect(renderer, &(rect));
 }
 
 void Ball::move_to_center(const int window_width, const int window_height) {
-	Ball::pos.x = (window_width - Ball::size) / 2.0f;
-	Ball::pos.y = (window_height - Ball::size) / 2.0f;
+	pos.x = (window_width - size) / 2.0f;
+	pos.y = (window_height - size) / 2.0f;
 }
