@@ -1,16 +1,10 @@
 ﻿#include <iostream>
 #include "SDL2/SDL.h"
 #include "utils/Vec2.hpp"
+#include "utils/WindowUtils.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
-
-void center_window(SDL_Window* window) {
-	SDL_DisplayMode DM;
-
-	SDL_GetCurrentDisplayMode(0, &DM);
-	SDL_SetWindowPosition(window, (DM.w - WINDOW_WIDTH) / 2, (DM.h - WINDOW_HEIGHT) / 2);
-}
 
 void draw_net(SDL_Renderer* renderer) {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -38,7 +32,7 @@ int SDL_main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	bool running = true;
 
-	center_window(window);
+	Window::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (running) {
 		SDL_Event event;
