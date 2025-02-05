@@ -11,7 +11,7 @@
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
 
-void reset_position(Ball& ball, std::vector<Paddle>& paddles) {
+static void reset_position(Ball& ball, std::vector<Paddle>& paddles) {
 	ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	for (Paddle& i : paddles) {

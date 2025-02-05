@@ -5,7 +5,7 @@ project(game)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
-add_executable(game main.cpp "geometry/Vec2.cpp" "utils/WindowUtils.cpp" "utils/RendererUtils.cpp" "entities/Ball.cpp" "entities/Paddle.cpp")
+add_executable(game main.cpp "geometry/Vec2.cpp" "utils/WindowUtils.cpp" "utils/RendererUtils.cpp" "entities/Ball.cpp" "entities/Paddle.cpp" "elements/Counter.cpp")
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(
