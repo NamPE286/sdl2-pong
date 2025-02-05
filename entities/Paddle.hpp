@@ -1,7 +1,7 @@
 #ifndef PADDLE_HEADER
 #define PADDLE_HEADER
 
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include "../geometry/Vec2.hpp"
 
 class Paddle {

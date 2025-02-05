@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "geometry/Vec2.hpp"
 #include "utils/WindowUtils.hpp"
 #include "utils/RendererUtils.hpp"

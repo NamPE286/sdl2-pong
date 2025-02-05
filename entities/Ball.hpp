@@ -1,7 +1,7 @@
 #ifndef BALL_HEADER
 #define BALL_HEADER
 
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include "../geometry/Vec2.hpp"
 
 
