@@ -10,6 +10,14 @@
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
 
+void reset_position(Ball& ball, std::vector<Paddle>& paddles) {
+	ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	for (Paddle& i : paddles) {
+		i.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+	}
+}
+
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -21,11 +29,8 @@ int SDL_main(int argc, char* argv[]) {
 	std::vector<Paddle> paddles = { Paddle(Vec2(10, 0), 100, 10), Paddle(Vec2(WINDOW_WIDTH - 10, 0), 100, 10) };
 
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-	ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	for (Paddle& i : paddles) {
-		i.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
-	}
+	reset_position(ball, paddles);
 
 	while (running) {
 		SDL_Event event;
