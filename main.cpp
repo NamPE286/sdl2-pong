@@ -1,29 +1,11 @@
 ﻿#include <iostream>
 #include "SDL2/SDL.h"
-#include "utils/Vec2.hpp"
+#include "geometry/Vec2.hpp"
 #include "utils/WindowUtils.hpp"
+#include "utils/RendererUtils.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
-
-void draw_net(SDL_Renderer* renderer) {
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-	int cur = 0;
-
-	for (int y = 0; y < WINDOW_HEIGHT; y++) {
-		if (cur < 10) {
-			SDL_RenderDrawPoint(renderer, WINDOW_WIDTH / 2, y);
-		}
-
-		if (cur == 15) {
-			cur = 0;
-		}
-		else {
-			cur++;
-		}
-	}
-}
 
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -49,7 +31,7 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 		SDL_RenderClear(renderer);
 
-		draw_net(renderer);
+		RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		SDL_RenderPresent(renderer);
 	}
