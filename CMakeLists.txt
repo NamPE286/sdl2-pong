@@ -4,7 +4,7 @@ project(game)
 
 find_package(SDL2 REQUIRED)
 
-add_executable(game main.cpp "geometry/Vec2.cpp" "utils/WindowUtils.cpp" "utils/RendererUtils.cpp" "entities/Ball.cpp")
+add_executable(game main.cpp "geometry/Vec2.cpp" "utils/WindowUtils.cpp" "utils/RendererUtils.cpp" "entities/Ball.cpp" "entities/Paddle.cpp")
 
 target_link_libraries(
 	game 
