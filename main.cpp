@@ -3,6 +3,7 @@
 #include "geometry/Vec2.hpp"
 #include "utils/WindowUtils.hpp"
 #include "utils/RendererUtils.hpp"
+#include "entities/Ball.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
@@ -14,7 +15,7 @@ int SDL_main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	bool running = true;
 
-	Window::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (running) {
 		SDL_Event event;

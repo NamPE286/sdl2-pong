@@ -1,3 +1,6 @@
+#ifndef VEC2_HEADER
+#define VEC2_HEADER
+
 class Vec2 {
 public:
 	float x, y;
@@ -9,3 +12,5 @@ public:
 	Vec2& operator+=(Vec2 const& rhs);
 	Vec2 operator*(float rhs);
 };
+
+#endif
