@@ -15,6 +15,8 @@ int SDL_main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	bool running = true;
 
+	Ball ball(Vec2(50, 50), 10);
+
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (running) {
@@ -33,6 +35,7 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_RenderClear(renderer);
 
 		RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+		ball.draw(renderer);
 
 		SDL_RenderPresent(renderer);
 	}
