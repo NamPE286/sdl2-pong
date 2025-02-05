@@ -21,9 +21,11 @@ void reset_position(Ball& ball, std::vector<Paddle>& paddles) {
 
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
+	TTF_Init();
 
 	SDL_Window* window = SDL_CreateWindow("Pong", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+	TTF_Font* scoreFont = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
 	bool running = true;
 
 	Ball ball(Vec2(), 10);
@@ -60,6 +62,8 @@ int SDL_main(int argc, char* argv[]) {
 	
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+	TTF_CloseFont(scoreFont);
+	TTF_Quit();
 	SDL_Quit();
 
 	return 0;
