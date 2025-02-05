@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include "SDL2/SDL.h"
+#include "utils/Vec2.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
