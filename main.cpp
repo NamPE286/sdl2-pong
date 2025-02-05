@@ -18,6 +18,7 @@ int SDL_main(int argc, char* argv[]) {
 	Ball ball(Vec2(50, 50), 10);
 
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (running) {
 		SDL_Event event;
