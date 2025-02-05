@@ -11,13 +11,33 @@
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
 
-static void reset_position(Ball& ball, std::vector<Paddle>& paddles) {
-	ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+class Game {
+	SDL_Renderer* renderer;
+	Ball ball = Ball(Vec2(), 10);
+	std::vector<Paddle> paddles = { Paddle(Vec2(10, 0), 100, 10), Paddle(Vec2(WINDOW_WIDTH - 10, 0), 100, 10) };
 
-	for (Paddle& i : paddles) {
-		i.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+public:
+	Game(SDL_Renderer* _renderer) {
+		renderer = _renderer;
 	}
-}
+
+	void draw() {
+		RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+		ball.draw(renderer);
+
+		for (Paddle& i : paddles) {
+			i.draw(renderer);
+		}
+	}
+
+	void reset() {
+		ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+		for (Paddle& i : paddles) {
+			i.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+		}
+	}
+};
 
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -28,12 +48,10 @@ int SDL_main(int argc, char* argv[]) {
 	TTF_Font* scoreFont = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
 	bool running = true;
 
-	Ball ball(Vec2(), 10);
-	std::vector<Paddle> paddles = { Paddle(Vec2(10, 0), 100, 10), Paddle(Vec2(WINDOW_WIDTH - 10, 0), 100, 10) };
+	Game game(renderer);
 
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	reset_position(ball, paddles);
+	game.reset();
 
 	while (running) {
 		SDL_Event event;
@@ -50,12 +68,7 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 		SDL_RenderClear(renderer);
 
-		RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-		ball.draw(renderer);
-		
-		for (Paddle& i : paddles) {
-			i.draw(renderer);
-		}
+		game.draw();
 
 		SDL_RenderPresent(renderer);
 	}
