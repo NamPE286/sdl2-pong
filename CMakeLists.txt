@@ -1,9 +1,14 @@
 ﻿cmake_minimum_required(VERSION 3.10)
 
-project(main)
+project(game)
 
-find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2 REQUIRED)
 
-add_executable(main main.cpp)
+add_executable(game main.cpp)
 
-target_link_libraries(main PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(
+	game 
+	PRIVATE 
+	SDL2::SDL2
+	SDL2::SDL2main
+)
