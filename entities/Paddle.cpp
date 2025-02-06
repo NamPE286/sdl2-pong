@@ -2,6 +2,8 @@
 #include <iostream>
 #include "../common.hpp"
 
+const float SPEED = 0.7f;
+
 Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind) {
 	pos = _pos;
 	size = _size;
@@ -36,9 +38,11 @@ void Paddle::update(float deltaTIme) {
 void Paddle::input_handler(SDL_Event* event) {
 	if (event->type == SDL_KEYDOWN) {
 		if (event->key.keysym.sym == keys[0].bind) {
+			velocity = -SPEED;
 			keys[0].is_down = true;
 		}
 		else if (event->key.keysym.sym == keys[1].bind) {
+			velocity = SPEED;
 			keys[1].is_down = true;
 		}
 	}
@@ -49,21 +53,16 @@ void Paddle::input_handler(SDL_Event* event) {
 		else if (event->key.keysym.sym == keys[1].bind) {
 			keys[1].is_down = false;
 		}
-	}
 
-	if (!keys[0].is_down && !keys[1].is_down) {
-		velocity = 0;
-		return;
-	}
-
-	if (keys[0].is_down && !keys[1].is_down) {
-		velocity = -0.3f;
-		return;
-	}
-
-	if (!keys[0].is_down && keys[1].is_down) {
-		velocity = 0.3f;
-		return;
+		if (!keys[0].is_down && !keys[1].is_down) {
+			velocity = 0;
+		}
+		else if (keys[0].is_down && !keys[1].is_down) {
+			velocity = -SPEED;
+		}
+		else if (!keys[0].is_down && keys[1].is_down) {
+			velocity = SPEED;
+		}
 	}
 }
 
