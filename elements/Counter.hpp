@@ -10,14 +10,14 @@ class Counter {
 	SDL_Renderer* renderer = nullptr;
 	TTF_Font* font = nullptr;
 	Label* label = nullptr;
+	Vec2 pos;
 public:
 	int count = 0;
 
-	Counter(SDL_Renderer* _renderer, TTF_Font* _font, Vec2 pos);
+	Counter(SDL_Renderer* _renderer, TTF_Font* _font, Vec2 _pos);
 	~Counter();
 	void draw();
-	void operator++();
-	void operator--();
+	void increase();
 };
 
 #endif

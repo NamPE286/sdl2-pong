@@ -40,8 +40,6 @@ static void changeBallDirection(Ball& ball, Paddle& paddle, float speed) {
 
 	ball.velocity.x = speed * (ball.velocity.x < 0 ? 1 : -1);
 	ball.velocity.y = tan(degAngle * 3.14f / 180.0f) * abs(ball.velocity.x);
-
-	std::cout << ball.velocity.x << ' ' << ball.velocity.y << ' ' << degAngle << '\n';
 }
 
 Game::Game(SDL_Renderer* _renderer, TTF_Font* _font) {
@@ -65,13 +63,13 @@ void Game::draw() {
 	}
 	if (collideState(ball, *players[0]->paddle, true) == 1) {
 		std::cout << "Out of left bound" << '\n';
-		//players[1]->score++;
+		players[1]->score->increase();
 		reset();
 		ball.velocity.x *= -1;
 	}
 	else if (collideState(ball, *players[1]->paddle, false) == 1) {
 		std::cout << "Out of right bound" << '\n';
-		//players[0]->score++;
+		players[0]->score->increase();
 		reset();
 	}
 	else if (collideState(ball, *players[0]->paddle, true) == 2) {
