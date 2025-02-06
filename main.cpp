@@ -39,12 +39,8 @@ int SDL_main(int argc, char* argv[]) {
 			if (event.type == SDL_QUIT) {
 				stat.running = false;
 			}
-			else if (event.type == SDL_KEYDOWN) {
-				switch (event.key.keysym.sym) {
-				case SDLK_ESCAPE:
-					stat.running = false;
-					break;
-				}
+			else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
+				stat.running = false;
 			}
 		}
 
