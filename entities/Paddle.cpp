@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../common.hpp"
 
-const float SPEED = 0.7f;
+const float SPEED = 0.5f;
 
 Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind) {
 	pos = _pos;

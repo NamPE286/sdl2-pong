@@ -20,7 +20,7 @@ void Ball:: draw(SDL_Renderer* renderer) {
 void Ball::update(float deltaTime) {
 	pos += velocity * deltaTime;
 
-	if (pos.y < 0 || pos.y > WINDOW_HEIGHT) {
+	if (pos.y < 0 || pos.y + size > WINDOW_HEIGHT) {
 		velocity.y *= -1;
 	}
 }
