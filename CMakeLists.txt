@@ -10,7 +10,7 @@ file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(
 	game 
-	PRIVATE 
+	PRIVATE
 	SDL2::SDL2
 	SDL2::SDL2main
 	SDL2_ttf::SDL2_ttf

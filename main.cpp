@@ -15,6 +15,15 @@
 #include "game/Game.hpp"
 #include "utils/LogUtils.hpp"
 
+#ifdef _WIN32
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#endif // _WIN32
+
+#ifdef linux
+#pragma comment(linker, "-mwindows")
+#endif
+
+
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
