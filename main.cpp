@@ -47,6 +47,7 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 		SDL_RenderClear(renderer);
 
+		game.update(stat.deltaTime);
 		game.draw();
 
 		SDL_RenderPresent(renderer);

@@ -6,15 +6,17 @@
 
 class Paddle {
 	SDL_Rect rect;
-	int size;
-	int width;
+	int window_width, window_height;
+	int size, width;
+	float velocity = 0.0f;
 public:
 	Vec2 pos;
 
-	Paddle(Vec2 _pos, const int _size, const int _width);
+	Paddle(Vec2 _pos, const int _size, const int _width, const int _window_width, const int _window_height);
 
 	void draw(SDL_Renderer* renderer);
-	void move_to_center(const int window_width, const int window_height);
+	void update(float deltaTIme);
+	void move_to_center();
 };
 
 #endif

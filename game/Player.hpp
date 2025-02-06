@@ -16,6 +16,7 @@ public:
 	Player(SDL_Renderer* _renderer, TTF_Font* font, bool pIndex, int _window_width, int _window_height);
 	~Player();
 	void draw();
+	void update(float deltaTime);
 	void reset();
 };
 

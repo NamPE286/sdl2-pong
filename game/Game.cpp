@@ -24,6 +24,12 @@ void Game::draw() {
 	}
 }
 
+void Game::update(float deltaTime) {
+	for (Player* i : players) {
+		i->update(deltaTime);
+	}
+}
+
 void Game::reset() {
 	ball.move_to_center(window_width, window_height);
 

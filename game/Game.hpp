@@ -17,6 +17,7 @@ public:
 	Game(SDL_Renderer* _renderer, TTF_Font* _font, int _window_width, int _window_height);
 	~Game();
 	void draw();
+	void update(float deltaTime);
 	void reset();
 };
 
