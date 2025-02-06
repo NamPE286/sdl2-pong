@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "../geometry/Vec2.hpp"
 
 Player::Player(SDL_Renderer* _renderer, TTF_Font* font, bool pIndex, int _window_width, int _window_height) {
 	renderer = _renderer;
