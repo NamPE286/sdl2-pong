@@ -36,7 +36,7 @@ void Game::input_handler(SDL_Event* event) {
 }
 
 void Game::reset() {
-	ball.move_to_center();
+	ball.reset();
 
 	for (Player* i : players) {
 		i->reset();

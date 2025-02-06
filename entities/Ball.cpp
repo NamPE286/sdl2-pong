@@ -17,7 +17,7 @@ void Ball:: draw(SDL_Renderer* renderer) {
 	SDL_RenderFillRect(renderer, &(rect));
 }
 
-void Ball::move_to_center() {
+void Ball::reset() {
 	pos.x = (WINDOW_WIDTH - size) / 2.0f;
 	pos.y = (WINDOW_HEIGHT - size) / 2.0f;
 }
