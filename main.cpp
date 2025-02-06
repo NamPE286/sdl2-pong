@@ -7,6 +7,7 @@
 #include "utils/RendererUtils.hpp"
 #include "entities/Ball.hpp"
 #include "entities/Paddle.hpp"
+#include "elements/Label.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
@@ -45,10 +46,11 @@ int SDL_main(int argc, char* argv[]) {
 
 	SDL_Window* window = SDL_CreateWindow("Pong", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-	TTF_Font* scoreFont = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
+	TTF_Font* font = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
+	Game game(renderer);
 	bool running = true;
 
-	Game game(renderer);
+	Label label(renderer, font, Vec2(10, 10), "0");
 
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game.reset();
@@ -69,13 +71,14 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_RenderClear(renderer);
 
 		game.draw();
+		label.draw();
 
 		SDL_RenderPresent(renderer);
 	}
 	
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	TTF_CloseFont(scoreFont);
+	TTF_CloseFont(font);
 	TTF_Quit();
 	SDL_Quit();
 
