@@ -30,6 +30,12 @@ void Game::update(float deltaTime) {
 	}
 }
 
+void Game::input_handler(SDL_Event* event) {
+	for (Player* i : players) {
+		i->input_handler(event);
+	}
+}
+
 void Game::reset() {
 	ball.move_to_center(window_width, window_height);
 

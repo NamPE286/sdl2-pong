@@ -42,6 +42,8 @@ int SDL_main(int argc, char* argv[]) {
 			else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
 				stat.running = false;
 			}
+
+			game.input_handler(&event);
 		}
 
 		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);

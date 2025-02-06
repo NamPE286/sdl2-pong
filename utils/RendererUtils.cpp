@@ -1,6 +1,6 @@
 #include "RendererUtils.hpp"
 
-void RendererUtils::draw_net(SDL_Renderer* renderer, const int window_width, const int window_height) {
+void RendererUtils::draw_net(SDL_Renderer* renderer, int window_width, int window_height) {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
 	int cur = 0;

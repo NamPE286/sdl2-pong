@@ -17,6 +17,7 @@ public:
 	~Player();
 	void draw();
 	void update(float deltaTime);
+	void input_handler(SDL_Event* event);
 	void reset();
 };
 
