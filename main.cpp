@@ -4,6 +4,7 @@
 #include <thread>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "common.hpp"
 #include "geometry/Vec2.hpp"
 #include "utils/WindowUtils.hpp"
 #include "utils/RendererUtils.hpp"
@@ -14,9 +15,6 @@
 #include "game/Game.hpp"
 #include "utils/LogUtils.hpp"
 
-constexpr auto WINDOW_WIDTH = 640;
-constexpr auto WINDOW_HEIGHT = 480;
-
 int SDL_main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
@@ -25,9 +23,9 @@ int SDL_main(int argc, char* argv[]) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	TTF_Font* font = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
 	Status stat;
-	Game game(renderer, font, WINDOW_WIDTH, WINDOW_HEIGHT);
+	Game game(renderer, font);
 
-	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	WindowUtils::center(window);
 	game.reset();
 	auto tLog = LogUtils::statusThread(&stat);
 

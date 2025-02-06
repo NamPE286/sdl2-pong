@@ -1,12 +1,11 @@
 #include "Paddle.hpp"
 #include <iostream>
+#include "../common.hpp"
 
-Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind, int _window_width, int _window_height) {
+Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind) {
 	pos = _pos;
 	size = _size;
 	width = _width;
-	window_width = _window_width;
-	window_height = _window_height;
 	keys[0].bind = up_bind;
 	keys[1].bind = down_bind;
 	rect.x = static_cast<int>(_pos.x);
@@ -29,8 +28,8 @@ void Paddle::update(float deltaTIme) {
 	if (pos.y < 0) {
 		pos.y = 0;
 	}
-	else if (pos.y > window_height - size) {
-		pos.y = window_height - size;
+	else if (pos.y > WINDOW_HEIGHT - size) {
+		pos.y = WINDOW_HEIGHT - size;
 	}
 }
 
@@ -69,5 +68,5 @@ void Paddle::input_handler(SDL_Event* event) {
 }
 
 void Paddle::move_to_center() {
-	pos.y = (window_height - size) / 2.0f;
+	pos.y = (WINDOW_HEIGHT - size) / 2.0f;
 }

@@ -8,12 +8,11 @@
 
 class Player {
 	SDL_Renderer* renderer;
-	int window_width, window_height;
 public:
 	Paddle* paddle;
 	Counter* score;
 
-	Player(SDL_Renderer* _renderer, TTF_Font* font, bool pIndex, int _window_width, int _window_height);
+	Player(SDL_Renderer* _renderer, TTF_Font* font, bool pIndex);
 	~Player();
 	void draw();
 	void update(float deltaTime);

@@ -1,8 +1,9 @@
 #include "WindowUtils.hpp"
+#include "../common.hpp"
 
-void WindowUtils::center(SDL_Window* window, int window_width, int window_height) {
+void WindowUtils::center(SDL_Window* window) {
 	SDL_DisplayMode DM;
 
 	SDL_GetCurrentDisplayMode(0, &DM);
-	SDL_SetWindowPosition(window, (DM.w - window_width) / 2, (DM.h - window_height) / 2);
+	SDL_SetWindowPosition(window, (DM.w - WINDOW_WIDTH) / 2, (DM.h - WINDOW_HEIGHT) / 2);
 }

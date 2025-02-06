@@ -1,12 +1,11 @@
 #include "Game.hpp"
+#include "../common.hpp"
 #include "../utils/RendererUtils.hpp"
 
-Game::Game(SDL_Renderer* _renderer, TTF_Font* _font, int _window_width, int _window_height) {
+Game::Game(SDL_Renderer* _renderer, TTF_Font* _font) {
 	renderer = _renderer;
 	font = _font;
-	window_width = _window_width;
-	window_height = _window_height;
-	players = { new Player(renderer, font, 0, window_width, window_height), new Player(renderer, font, 1, window_width, window_height) };
+	players = { new Player(renderer, font, 0), new Player(renderer, font, 1) };
 }
 
 Game::~Game() {
@@ -16,7 +15,7 @@ Game::~Game() {
 }
 
 void Game::draw() {
-	RendererUtils::draw_net(renderer, window_width, window_height);
+	RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ball.draw(renderer);
 
 	for (Player* i : players) {
@@ -37,7 +36,7 @@ void Game::input_handler(SDL_Event* event) {
 }
 
 void Game::reset() {
-	ball.move_to_center(window_width, window_height);
+	ball.move_to_center();
 
 	for (Player* i : players) {
 		i->reset();

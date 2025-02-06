@@ -13,7 +13,7 @@ public:
 	Ball(Vec2 _pos, int _size);
 
 	void draw(SDL_Renderer* renderer);
-	void move_to_center(int window_width, int window_height);
+	void move_to_center();
 };
 
 #endif

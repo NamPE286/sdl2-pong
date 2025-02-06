@@ -1,4 +1,5 @@
 #include "Ball.hpp"
+#include "../common.hpp"
 
 Ball::Ball(Vec2 _pos, int _size) {
 	pos = _pos;
@@ -16,7 +17,7 @@ void Ball:: draw(SDL_Renderer* renderer) {
 	SDL_RenderFillRect(renderer, &(rect));
 }
 
-void Ball::move_to_center(int window_width, int window_height) {
-	pos.x = (window_width - size) / 2.0f;
-	pos.y = (window_height - size) / 2.0f;
+void Ball::move_to_center() {
+	pos.x = (WINDOW_WIDTH - size) / 2.0f;
+	pos.y = (WINDOW_HEIGHT - size) / 2.0f;
 }
