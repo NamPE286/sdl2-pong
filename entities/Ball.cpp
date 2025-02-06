@@ -17,6 +17,14 @@ void Ball:: draw(SDL_Renderer* renderer) {
 	SDL_RenderFillRect(renderer, &(rect));
 }
 
+void Ball::update(float deltaTime) {
+	pos += velocity * deltaTime;
+
+	if (pos.y < 0 || pos.y > WINDOW_HEIGHT) {
+		velocity.y *= -1;
+	}
+}
+
 void Ball::reset() {
 	pos.x = (WINDOW_WIDTH - size) / 2.0f;
 	pos.y = (WINDOW_HEIGHT - size) / 2.0f;

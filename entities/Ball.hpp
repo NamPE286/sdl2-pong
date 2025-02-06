@@ -6,13 +6,15 @@
 
 class Ball {
 	SDL_Rect rect;
-	int size;
 public:
 	Vec2 pos;
+	Vec2 velocity = Vec2(0, 0);
+	int size;
 
 	Ball(Vec2 _pos, int _size);
 
 	void draw(SDL_Renderer* renderer);
+	void update(float deltaTime);
 	void reset();
 };
 

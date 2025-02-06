@@ -11,6 +11,7 @@ public:
 	Vec2 operator+(Vec2 const& rhs);
 	Vec2& operator+=(Vec2 const& rhs);
 	Vec2 operator*(float rhs);
+	Vec2& operator*=(Vec2 const& rhs);
 };
 
 #endif

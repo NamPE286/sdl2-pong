@@ -11,10 +11,10 @@ class Paddle {
 	};
 
 	SDL_Rect rect;
-	int size, width;
 	Key keys[2];
 	float velocity = 0.0f;
 public:
+	int size, width;
 	Vec2 pos;
 
 	Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind);
