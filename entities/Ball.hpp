@@ -2,6 +2,7 @@
 #define BALL_HEADER
 
 #include <SDL2/SDL.h>
+#include "Paddle.hpp"
 #include "../geometry/Vec2.hpp"
 
 class Ball {
@@ -15,6 +16,8 @@ public:
 
 	void draw(SDL_Renderer* renderer);
 	void update(float deltaTime);
+	int getCollideState(Paddle& left, Paddle& right);
+	void changeDirection(Paddle& paddle, float speed);
 	void reset();
 };
 

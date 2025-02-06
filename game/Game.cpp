@@ -5,43 +5,6 @@
 #include <iostream>
 #include <math.h>
 
-static int collideState(Ball& ball, Paddle& paddle, bool left) {
-	if (left) {
-		if (ball.pos.x < 0) {
-			return 1;
-		}
-
-		if (ball.pos.x > paddle.pos.x + paddle.width || ball.pos.x < paddle.pos.x) {
-			return 0;
-		}
-	}
-
-	if (!left) {
-		if (ball.pos.x + ball.size > WINDOW_WIDTH) {
-			return 1;
-		}
-
-		if (ball.pos.x + ball.size < paddle.pos.x || ball.pos.x + ball.size > paddle.pos.x + paddle.width) {
-			return 0;
-		}
-	}
-
-	if (paddle.pos.y <= ball.pos.y + ball.size && ball.pos.y <= paddle.pos.y + paddle.size) {
-		return 2;
-	}
-}
-
-static void changeBallDirection(Ball& ball, Paddle& paddle, float speed) {
-	float degAngle = (ball.pos.y + ball.size / 2.0f) - (paddle.pos.y + paddle.size / 2.0f);
-	degAngle *= 1.2;
-
-	degAngle = __min(degAngle, 55.0f);
-	degAngle = __max(degAngle, -55.0f);
-
-	ball.velocity.x = speed * (ball.velocity.x < 0 ? 1 : -1);
-	ball.velocity.y = tan(degAngle * 3.14f / 180.0f) * abs(ball.velocity.x);
-}
-
 Game::Game(SDL_Renderer* _renderer, TTF_Font* _font) {
 	renderer = _renderer;
 	font = _font;
@@ -61,25 +24,6 @@ void Game::draw() {
 	for (Player* i : players) {
 		i->draw();
 	}
-	if (collideState(ball, *players[0]->paddle, true) == 1) {
-		std::cout << "Out of left bound" << '\n';
-		players[1]->score->increase();
-		reset();
-		ball.velocity.x *= -1;
-	}
-	else if (collideState(ball, *players[1]->paddle, false) == 1) {
-		std::cout << "Out of right bound" << '\n';
-		players[0]->score->increase();
-		reset();
-	}
-	else if (collideState(ball, *players[0]->paddle, true) == 2) {
-		speed += 0.05f;
-		changeBallDirection(ball, *players[0]->paddle, speed);
-	}
-	else if (collideState(ball, *players[1]->paddle, false) == 2) {
-		speed += 0.05f;
-		changeBallDirection(ball, *players[1]->paddle, speed);
-	}
 }
 
 void Game::update(float deltaTime) {
@@ -87,6 +31,28 @@ void Game::update(float deltaTime) {
 
 	for (Player* i : players) {
 		i->update(deltaTime);
+	}
+
+	int colState = ball.getCollideState(*players[0]->paddle, *players[1]->paddle);
+
+	if (colState == -1) {
+		std::cout << "Out of left bound" << '\n';
+		players[1]->score->increase();
+		reset();
+		ball.velocity.x *= -1;
+	}
+	else if (colState == -2) {
+		std::cout << "Out of right bound" << '\n';
+		players[0]->score->increase();
+		reset();
+	}
+	else if (colState == 1) {
+		speed += 0.05f;
+		ball.changeDirection(*players[0]->paddle, speed);
+	}
+	else if (colState == 2) {
+		speed += 0.05f;
+		ball.changeDirection(*players[1]->paddle, speed);
 	}
 }
 

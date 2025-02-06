@@ -11,13 +11,13 @@ class Paddle {
 	};
 
 	SDL_Rect rect;
-	Key keys[2];
+	Key keys[3];
 	float velocity = 0.0f;
 public:
 	int size, width;
 	Vec2 pos;
 
-	Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind);
+	Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind, Uint32 slow_bind);
 
 	void draw(SDL_Renderer* renderer);
 	void update(float deltaTIme);

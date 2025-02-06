@@ -6,12 +6,11 @@ Player::Player(SDL_Renderer* _renderer, TTF_Font* font, bool pIndex) {
 	renderer = _renderer;
 
 	if (pIndex == 0) {
-		paddle = new Paddle(Vec2(10, 0), 100, 10, SDLK_w, SDLK_s);
+		paddle = new Paddle(Vec2(10, 0), 100, 10, SDLK_w, SDLK_s, SDLK_c);
 		score = new Counter(renderer, font, Vec2(WINDOW_WIDTH / 4.0f, 10));
-
 	}
 	else {
-		paddle = new Paddle(Vec2(WINDOW_WIDTH - 20, 0), 100, 10, SDLK_UP, SDLK_DOWN);
+		paddle = new Paddle(Vec2(WINDOW_WIDTH - 20, 0), 100, 10, SDLK_UP, SDLK_DOWN, SDLK_RSHIFT);
 		score = new Counter(renderer, font, Vec2(WINDOW_WIDTH * 3 / 4.0f, 10));
 	}
 }

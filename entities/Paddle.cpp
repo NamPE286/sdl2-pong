@@ -2,14 +2,15 @@
 #include <iostream>
 #include "../common.hpp"
 
-const float SPEED = 0.5f;
+const float SPEED = 0.75f;
 
-Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind) {
+Paddle::Paddle(Vec2 _pos, int _size, int _width, Uint32 up_bind, Uint32 down_bind, Uint32 slow_bind) {
 	pos = _pos;
 	size = _size;
 	width = _width;
 	keys[0].bind = up_bind;
 	keys[1].bind = down_bind;
+	keys[2].bind = slow_bind;
 	rect.x = static_cast<int>(_pos.x);
 	rect.y = static_cast<int>(_pos.y);
 	rect.w = _width;
@@ -38,12 +39,27 @@ void Paddle::update(float deltaTIme) {
 void Paddle::input_handler(SDL_Event* event) {
 	if (event->type == SDL_KEYDOWN) {
 		if (event->key.keysym.sym == keys[0].bind) {
-			velocity = -SPEED;
+			if (keys[2].is_down) {
+				velocity = -SPEED / 2.5f;
+			}
+			else {
+				velocity = -SPEED;
+			}
+
 			keys[0].is_down = true;
 		}
 		else if (event->key.keysym.sym == keys[1].bind) {
-			velocity = SPEED;
+			if (keys[2].is_down) {
+				velocity = SPEED / 2.5f;
+			}
+			else {
+				velocity = SPEED;
+			}
+
 			keys[1].is_down = true;
+		}
+		else if (event->key.keysym.sym == keys[2].bind) {
+			keys[2].is_down = true;
 		}
 	}
 	else if (event->type == SDL_KEYUP) {
@@ -53,15 +69,28 @@ void Paddle::input_handler(SDL_Event* event) {
 		else if (event->key.keysym.sym == keys[1].bind) {
 			keys[1].is_down = false;
 		}
+		else if (event->key.keysym.sym == keys[2].bind) {
+			keys[2].is_down = false;
+		}
 
 		if (!keys[0].is_down && !keys[1].is_down) {
 			velocity = 0;
 		}
 		else if (keys[0].is_down && !keys[1].is_down) {
-			velocity = -SPEED;
+			if (keys[2].is_down) {
+				velocity = -SPEED / 2.5f;
+			}
+			else {
+				velocity = -SPEED;
+			}
 		}
 		else if (!keys[0].is_down && keys[1].is_down) {
-			velocity = SPEED;
+			if (keys[2].is_down) {
+				velocity = SPEED / 2.5f;
+			}
+			else {
+				velocity = SPEED;
+			}
 		}
 	}
 }
