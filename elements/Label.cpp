@@ -11,7 +11,7 @@ Label::Label(SDL_Renderer* _renderer, TTF_Font* _font, Vec2 pos, const std::stri
 	int w, h;
 	SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
 
-	rect.x = static_cast<int>(pos.x);
+	rect.x = static_cast<int>(pos.x) - w / 2;
 	rect.y = static_cast<int>(pos.y);
 	rect.w = w;
 	rect.h = h;

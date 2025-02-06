@@ -8,34 +8,44 @@
 #include "entities/Ball.hpp"
 #include "entities/Paddle.hpp"
 #include "elements/Counter.hpp"
+#include "game/Player.hpp"
 
 constexpr auto WINDOW_WIDTH = 640;
 constexpr auto WINDOW_HEIGHT = 480;
 
 class Game {
 	SDL_Renderer* renderer;
+	TTF_Font* font;
 	Ball ball = Ball(Vec2(), 10);
-	std::vector<Paddle> paddles = { Paddle(Vec2(10, 0), 100, 10), Paddle(Vec2(WINDOW_WIDTH - 10, 0), 100, 10) };
+	std::vector<Player*> players;
 
 public:
-	Game(SDL_Renderer* _renderer) {
+	Game(SDL_Renderer* _renderer, TTF_Font* _font) {
 		renderer = _renderer;
+		font = _font;
+		players = { new Player(renderer, font, 0, WINDOW_WIDTH, WINDOW_HEIGHT), new Player(renderer, font, 1, WINDOW_WIDTH, WINDOW_HEIGHT) };
+	}
+
+	~Game() {
+		for (Player* i : players) {
+			delete i;
+		}
 	}
 
 	void draw() {
 		RendererUtils::draw_net(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 		ball.draw(renderer);
 
-		for (Paddle& i : paddles) {
-			i.draw(renderer);
+		for (Player* i : players) {
+			i->draw();
 		}
 	}
 
 	void reset() {
 		ball.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-		for (Paddle& i : paddles) {
-			i.move_to_center(WINDOW_WIDTH, WINDOW_HEIGHT);
+		for (Player* i : players) {
+			i->reset();
 		}
 	}
 };
@@ -47,10 +57,8 @@ int SDL_main(int argc, char* argv[]) {
 	SDL_Window* window = SDL_CreateWindow("Pong", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	TTF_Font* font = TTF_OpenFont("assets/DejaVuSansMono.ttf", 40);
-	Game game(renderer);
+	Game game(renderer, font);
 	bool running = true;
-
-	Counter counter(renderer, font, Vec2(10, 10));
 
 	WindowUtils::center(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game.reset();
@@ -62,8 +70,12 @@ int SDL_main(int argc, char* argv[]) {
 			if (event.type == SDL_QUIT) {
 				running = false;
 			}
-			else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
-				running = false;
+			else if (event.type == SDL_KEYDOWN) {
+				switch (event.key.keysym.sym) {
+				case SDLK_ESCAPE:
+						running = false;
+						break;
+				}
 			}
 		}
 
@@ -71,7 +83,6 @@ int SDL_main(int argc, char* argv[]) {
 		SDL_RenderClear(renderer);
 
 		game.draw();
-		counter.draw();
 
 		SDL_RenderPresent(renderer);
 	}
