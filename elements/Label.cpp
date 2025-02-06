@@ -1,9 +1,8 @@
 #include "Label.hpp"
 
-Label::Label(SDL_Renderer* _renderer, TTF_Font* _font, Vec2 _pos, const std::string& _value) {
+Label::Label(SDL_Renderer* _renderer, TTF_Font* _font, Vec2 pos, const std::string _value) {
 	renderer = _renderer;
 	value = _value;
-	pos = _pos;
 	font = _font;
 
 	surface = TTF_RenderText_Solid(font, value.c_str(), { 0xFF, 0xFF, 0xFF, 0xFF });
