@@ -12,7 +12,8 @@ class Game {
 	TTF_Font* font;
 	Ball ball = Ball(Vec2(), 10);
 	std::vector<Player*> players;
-	float speed = 0.3f;
+	float speed = 0.35f;
+
 public:
 	Game(SDL_Renderer* _renderer, TTF_Font* _font);
 	~Game();

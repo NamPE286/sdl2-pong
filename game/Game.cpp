@@ -73,9 +73,11 @@ void Game::draw() {
 		reset();
 	}
 	else if (collideState(ball, *players[0]->paddle, true) == 2) {
+		speed += 0.05f;
 		changeBallDirection(ball, *players[0]->paddle, speed);
 	}
 	else if (collideState(ball, *players[1]->paddle, false) == 2) {
+		speed += 0.05f;
 		changeBallDirection(ball, *players[1]->paddle, speed);
 	}
 }
@@ -96,6 +98,7 @@ void Game::input_handler(SDL_Event* event) {
 
 void Game::reset() {
 	ball.reset();
+	speed = 0.35f;
 	ball.velocity = Vec2(speed, 0);
 
 	for (Player* i : players) {
