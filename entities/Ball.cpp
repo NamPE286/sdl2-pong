@@ -56,6 +56,8 @@ int Ball::getCollideState(Paddle& left, Paddle& right) {
 			return 2;
 		}
 	}
+
+	return 0;
 }
 
 void Ball::changeDirection(Paddle& paddle, float speed) {
